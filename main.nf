@@ -1,11 +1,11 @@
-params.str = 'Hello world!'
+userinput = params.inputstring
 
 process splitLetters {
   output:
     path 'chunk_*'
 
   """
-  printf '${params.str}' | split -b 6 - chunk_
+  printf '${userinput}' | split -b 6 - chunk_
   """
 }
 
