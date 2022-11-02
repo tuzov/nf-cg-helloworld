@@ -1,0 +1,28 @@
+id: nf-helloworld
+name: nf-helloworld
+version: 0.1
+description: A nextflow test hello world workflow
+author: Vlad Tuzov
+website: https://github.com/tuzov/nf-cg-helloworld
+
+workflow:
+
+  steps:
+    - name: Running nf-helloworld
+      type: nextflow
+      script: main.nf
+      params.project: ${job_id}
+
+  inputs:
+
+    - id: inputstring
+      description: Input String
+      details: Enter at least two words
+      type: text
+      required: true
+
+  outputs:
+
+    - id: outdir
+      description: Hello-nf results
+      type: local_folder
