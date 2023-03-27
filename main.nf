@@ -1,25 +1,42 @@
-userinput = params.inputstring
-
-process splitLetters {
-  output:
-    path 'chunk_*'
+process short1min {
 
   """
-  printf '${userinput}' | split -b 6 - chunk_
+  echo "job_name: short1min; starts"
+  sleep 60
+  echo "job_name: short1min; done"
   """
 }
 
-process convertToUpper {
-  input:
-    path x
-  output:
-    stdout
+process short2min {
 
   """
-  cat $x | tr '[a-z]' '[A-Z]'
+  echo "job_name: short2min; starts"
+  sleep 120
+  echo "job_name: short2min; done"
+  """
+}
+
+process long3min {
+
+  """
+  echo "job_name: long3min"
+  sleep 180
+  echo "job_name: short2min; done"
+  """
+}
+
+process long6min {
+
+  """
+  echo "job_name: long6min; starts"
+  sleep 360
+  echo "job_name: long6min; done"
   """
 }
 
 workflow {
-  splitLetters | flatten | convertToUpper | view { it.trim() }
+  short1min()
+  short2min()
+  long3min()
+  long6min()
 }
